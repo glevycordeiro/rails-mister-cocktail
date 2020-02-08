@@ -25,29 +25,16 @@ Ingredient.destroy_all
 # end
 # puts 'Finished!'
 
-# puts 'Creating 10 fake cocktails...'
-# 10.times do
-#   cocktail = Cocktail.new(
-#     name:    Faker::Food.dish
-#   )
-#   if cocktail.save
-#     cocktail.save!
-#   end
-# end
-# puts 'Finished!'
-
-# puts 'Creating 10 fake doses...'
-# 10.times do
-#   dose = Dose.new(
-#     description: "#{rand(10..30)} cl",
-#     cocktail: Cocktail.all.sample,
-#     ingredient: Ingredient.all.sample
-#   )
-#   if dose.save
-#     dose.save!
-#   end
-# end
-# puts 'Finished!'
+puts 'Creating 10 fake cocktails...'
+10.times do
+  cocktail = Cocktail.new(
+    name:    Faker::Food.dish
+  )
+  if cocktail.save
+    cocktail.save!
+  end
+end
+puts 'Finished!'
 
 response = RestClient.get(Ingredient::URL)
 
@@ -57,3 +44,16 @@ json[:drinks].each do |drink|
   Ingredient.create!(name: drink[:strIngredient1])
   puts drink[:strIngredient1]
 end
+
+puts 'Creating 10 fake doses...'
+10.times do
+  dose = Dose.new(
+    description: "#{rand(10..30)} cl",
+    cocktail: Cocktail.all.sample,
+    ingredient: Ingredient.all.sample
+  )
+  if dose.save
+    dose.save!
+  end
+end
+puts 'Finished!'
